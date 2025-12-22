@@ -4,11 +4,8 @@ import (
 	"samurenkoroma/services/configs"
 	"samurenkoroma/services/internal/app"
 	"samurenkoroma/services/internal/auth"
-	"samurenkoroma/services/internal/books"
-	"samurenkoroma/services/internal/finance"
-	"samurenkoroma/services/internal/pages"
+	"samurenkoroma/services/internal/chitalka/books"
 	"samurenkoroma/services/internal/user"
-	"samurenkoroma/services/internal/weather"
 	"samurenkoroma/services/pkg/db"
 )
 
@@ -20,6 +17,7 @@ func main() {
 
 	//Репозитории
 	userRepo := user.NewUserRepo(database)
+	bookRepo := books.NewBookRepo(database)
 
 	//Сервисы
 	authService := auth.NewAuthService(userRepo)
@@ -29,11 +27,12 @@ func main() {
 		Config:      conf.Auth,
 	})
 
+	books.NewBookHandler(books.BookHandlerDeps{Repo: bookRepo, Router: application.App})
+
 	//home.NewHomeHandler(application)
-	books.NewBookHandler(application)
-	pages.NewPageHandler(application)
-	weather.NewWeatherHandler(application)
-	finance.NewFinanceHandler(application)
+	// pages.NewPageHandler(application)
+	// weather.NewWeatherHandler(application)
+	// finance.NewFinanceHandler(application)
 
 	application.Run()
 }

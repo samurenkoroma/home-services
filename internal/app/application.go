@@ -1,14 +1,15 @@
 package app
 
 import (
-	"github.com/gofiber/contrib/fiberzerolog"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/recover"
-	"github.com/rs/zerolog"
 	"log"
 	"samurenkoroma/services/configs"
 	"samurenkoroma/services/pkg/db"
 	"samurenkoroma/services/pkg/logger"
+
+	"github.com/gofiber/contrib/fiberzerolog"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/rs/zerolog"
 )
 
 type AuthClaims struct {
@@ -31,7 +32,7 @@ func NewApplication(cfg *configs.Config, db *db.Db) *Polevod {
 	}))
 
 	app.Use(recover.New())
-	app.Static("/public", "./public")
+	// app.Static("/public", "./public")
 	//app.Use(middleware.IsAuthenticated(cfg.Auth))
 
 	application := Polevod{
