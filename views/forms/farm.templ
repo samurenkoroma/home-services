@@ -1,0 +1,43 @@
+package forms
+
+import "samurenkoroma/services/views/components"
+
+templ CreateFarm(){
+    <div>
+        <form>
+            @components.Input(components.InputProps{
+                Name: "name",
+                Placeholder: "Наименование",
+                })
+            @components.SubmitButton()
+        </form>
+    </div>
+}
+
+templ  CreateGardenBed(){
+    @formStyle()
+    <div>
+        <form class="form">
+            @components.Input(components.InputProps{
+                Name: "name",
+                Placeholder: "Наименование",
+            })
+            @components.Input(components.InputProps{
+                Name: "group",
+                Placeholder: "Группа",
+            })
+            @components.Input(components.InputProps{
+                Name: "length",
+                Placeholder: "Длина",
+            })
+            @components.Input(components.InputProps{
+                Name: "width",
+                Placeholder: "Ширина",
+            })
+
+            @components.SubmitButton(){
+                <span>Создать</span>
+            }
+        </form>
+    </div>
+}

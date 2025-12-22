@@ -1,0 +1,108 @@
+package pages
+
+import "samurenkoroma/services/views/layout"
+import "samurenkoroma/services/views/components"
+
+templ marketStyle() {
+<style>
+    .market {
+        display: grid;
+        height: 100vh;
+        grid-template-rows: auto ;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "controls controls"
+            "goods shops";
+    }
+</style>
+}
+
+templ goodsStyle() {
+<style>
+.controls{
+    grid-area: controls;
+    display: flex;
+    gap: 30px;
+    background-color: #343434;
+}
+    .goods {
+        grid-area: goods;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        overflow: scroll;
+
+    }
+    .goods div{
+        box-sizing: content-box;
+        width: 80%;
+        height: 20px;
+        padding: 15px;
+        margin: 5px;
+        align-items: center;
+        justify-content: center;
+        border:  1px solid #000;
+        display: flex;
+    }
+    .goods :nth-child(odd){
+        background-color: #ababab;
+    }
+</style>
+}
+templ shopsStyle() {
+<style>
+    .shops {
+        grid-area: shops;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+    }
+</style>
+}
+
+templ Market() {
+    @layout.Layout(layout.LayoutProps{Title: "Рынок"}){
+        @marketStyle()
+        <main class="market">
+            <div class="controls">
+                @components.Input(components.InputProps{
+                Placeholder: "test",
+                Name: "id",
+                
+                })
+                @components.LinkButton("google.com"){
+                    <span>Перейти</span>
+                }
+                @components.SubmitButton(){
+                    <span>Перейти</span>
+                }
+            </div>
+            @goodsStyle()
+            <div class="goods">
+                <div>Томат</div>
+                <div>Огурец</div>
+                <div>Баклажан</div>
+                <div>Перец сладкий</div>
+                <div>Перец горький</div>
+                <div>Картофель</div>
+                <div>Горох</div>
+                <div>Клубника</div>
+                <div>Капуста пекинская</div>
+                <div>Капуста белая</div>
+                <div>Кукурудза</div>
+                <div>Фасоль</div>
+                <div>Фасоль</div>
+                <div>Фасоль</div>
+                <div>Фасоль</div>
+                <div>Фасоль</div>
+                <div>Фасоль</div>
+                <div>Фасоль</div>
+
+            </div>
+            @shopsStyle()
+            <div class="shops">Рынки</div>
+        </main>
+    }
+}

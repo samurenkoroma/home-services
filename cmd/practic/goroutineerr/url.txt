@@ -1,0 +1,3 @@
+http://sensors.lab.raspi
+https://grafana.lab.raspi
+https://google.com

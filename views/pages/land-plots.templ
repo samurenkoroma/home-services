@@ -1,0 +1,12 @@
+package pages
+
+import "samurenkoroma/services/views/layout"
+import "samurenkoroma/services/views/forms"
+
+templ LandPlots() {
+    @layout.Layout(layout.LayoutProps{Title: "Участки"}){
+        <main>
+            @forms.CreateGardenBed()
+        </main>
+    }
+}

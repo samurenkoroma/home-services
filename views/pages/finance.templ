@@ -1,0 +1,16 @@
+package pages
+
+import "samurenkoroma/services/views/layout"
+import "samurenkoroma/services/views/forms"
+
+templ Finance() {
+    @layout.Layout(layout.LayoutProps{Title: "Финансы"}){
+        <main>
+            @forms.CreateInvoiceForm()
+
+            <table>
+                
+            </table>
+        </main>
+    }
+}
