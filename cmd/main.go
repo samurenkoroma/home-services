@@ -4,20 +4,20 @@ import (
 	"samurenkoroma/services/configs"
 	"samurenkoroma/services/internal/app"
 	"samurenkoroma/services/internal/auth"
-	"samurenkoroma/services/internal/chitalka/books"
 	"samurenkoroma/services/internal/user"
 	"samurenkoroma/services/pkg/db"
+	"samurenkoroma/services/pkg/repositories"
+	"samurenkoroma/services/pkg/routes"
 )
 
 func main() {
 	conf := configs.LoadConfig()
 	database := db.NewDb(conf)
-
 	application := app.NewApplication(conf, database)
 
 	//Репозитории
 	userRepo := user.NewUserRepo(database)
-	bookRepo := books.NewBookRepo(database)
+	bookRepo := repositories.NewBookRepo(database)
 
 	//Сервисы
 	authService := auth.NewAuthService(userRepo)
@@ -27,7 +27,7 @@ func main() {
 		Config:      conf.Auth,
 	})
 
-	books.NewBookHandler(books.BookHandlerDeps{Repo: bookRepo, Router: application.App})
+	routes.BookRouter(application.App, bookRepo)
 
 	//home.NewHomeHandler(application)
 	// pages.NewPageHandler(application)
