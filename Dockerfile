@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.21.1-alpine as build
+FROM golang:1.25.5-alpine as build
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN go mod download
 COPY . .
 
 RUN #GOARCH=arm64 go build -o application main.go
-RUN go build -o application main.go
+RUN go build -o application cmd/main.go
 
 FROM alpine
 

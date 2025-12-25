@@ -12,5 +12,6 @@ func BookRouter(router fiber.Router, repo repositories.BookRepository) {
 
 	booksGroup.Get("", handlers.GetList(repo))
 	booksGroup.Post("", handlers.Create(repo))
+	booksGroup.Get("/resource/:id", handlers.GetResource(repo))
 	booksGroup.Get("/:id", handlers.GetOne(repo))
 }

@@ -1,6 +1,9 @@
 package payloads
 
-import "samurenkoroma/services/pkg/entities"
+import (
+	"fmt"
+	"samurenkoroma/services/pkg/entities"
+)
 
 type BookRequest struct {
 	Title   string   `json:"title"`
@@ -35,7 +38,7 @@ func MakeBookResponse(book entities.Book) BookResponse {
 		for _, r := range book.Resources {
 			resources = append(resources, ResourceResponse{
 				Type: uint(r.Type),
-				Link: r.Meta,
+				Link: fmt.Sprintf("http://lab.note:8080/books/resource/%d", r.ID),
 			})
 		}
 	}

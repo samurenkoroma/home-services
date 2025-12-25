@@ -8,6 +8,7 @@ import (
 	"samurenkoroma/services/pkg/payloads"
 	"samurenkoroma/services/pkg/repositories"
 	"samurenkoroma/services/pkg/response"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -70,5 +71,18 @@ func GetOne(repo repositories.BookRepository) fiber.Handler {
 		}
 
 		return response.JSON(ctx, payloads.MakeBookResponse(*book))
+	}
+}
+
+func GetResource(repo repositories.BookRepository) fiber.Handler {
+	return func(ctx *fiber.Ctx) error {
+		id, _ := ctx.ParamsInt("id")
+
+		resource, err := repo.GetResourceById(uint(id))
+		if err != nil {
+			return response.ERROR(ctx, err, http.StatusNotFound)
+		}
+		ctx.Set(fiber.HeaderContentDisposition, `attachment; filename="`+strconv.Quote(resource.File)+`"`)
+		return ctx.Download(resource.File)
 	}
 }

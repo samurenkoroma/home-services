@@ -18,6 +18,7 @@ type Author struct {
 type Resource struct {
 	gorm.Model
 	Type   ResourceType
+	File   string
 	Meta   string
 	BookID uint
 }

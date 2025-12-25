@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"log"
 	"samurenkoroma/services/configs"
 	"samurenkoroma/services/pkg/db"
@@ -47,7 +48,7 @@ func NewApplication(cfg *configs.Config, db *db.Db) *Polevod {
 }
 
 func (a *Polevod) Run() {
-	log.Fatal(a.App.Listen(a.Config.Server.ApiPort))
+	log.Fatal(a.App.Listen(fmt.Sprintf("0.0.0.0%s", a.Config.Server.ApiPort)))
 }
 
 func NotImplement() error {

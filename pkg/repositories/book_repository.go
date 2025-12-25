@@ -10,6 +10,7 @@ type BookRepository interface {
 	// CreateAuthor(a *Author) (*Author, error)
 	GetList(params *BookQueryParams) (books []entities.Book)
 	GetById(id uint) (*entities.Book, error)
+	GetResourceById(id uint) (*entities.Resource, error)
 }
 
 func NewBookRepo(database *db.Db) BookRepository {
@@ -20,6 +21,15 @@ func NewBookRepo(database *db.Db) BookRepository {
 
 type BookRepositoryImpl struct {
 	database *db.Db
+}
+
+// GetResourceById implements [BookRepository].
+func (repo *BookRepositoryImpl) GetResourceById(id uint) (resource *entities.Resource, err error) {
+	result := repo.database.DB.First(&resource, "id = ?", id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return resource, nil
 }
 
 // CreateAuthor implements [BookRepository].
@@ -45,10 +55,19 @@ func (repo *BookRepositoryImpl) Create(book *entities.Book) (*entities.Book, err
 
 		return nil, result.Error
 	}
-	repo.database.Model(&book).Association("Resources").Append(entities.Resource{Type: entities.DocumentType, Meta: "часть 1"})
+	// resources := []entities.Resource
+	// if (len(book.Resources) > 0){
+	// 	resources
+	// }
+	// repo.database.Model(&book).
+	// 	Association("Resources").
+	// 	Append(entities.Resource{
+	// 		Type: entities.DocumentType,
+	// 		Meta: "часть 1",
+	// 		File: book.Resources.,
+	// 	})
 
-	b, _ := repo.GetById(book.ID)
-	return b, nil
+	return book, nil
 }
 
 type BookQueryParams struct {
