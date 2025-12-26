@@ -13,7 +13,7 @@ COPY . .
 # RUN GOARCH=arm64 go build -o application cmd/main.go
 RUN go build -o application cmd/main.go
 RUN go build -o scaner cmd/scaner/main.go
-RUN go build -o migrations ./migrations/auto.go
+RUN go build -o migrations migrations/auto.go
 
 FROM alpine
 
