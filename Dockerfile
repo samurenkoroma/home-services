@@ -12,9 +12,11 @@ COPY . .
 
 # RUN GOARCH=arm64 go build -o application cmd/main.go
 RUN go build -o application cmd/main.go
+RUN go build -o scaner cmd/scaner/main.go
 
 FROM alpine
 
 COPY --from=build /app/application /app/application
+COPY --from=build /app/scaner /app/scaner
 
 CMD ["/app/application"]
