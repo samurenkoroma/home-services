@@ -27,7 +27,7 @@ func main() {
 		Config:      conf.Auth,
 	})
 
-	routes.BookRouter(application.App, bookRepo)
+	routes.BookRouter(application.App, bookRepo, conf)
 
 	//home.NewHomeHandler(application)
 	// pages.NewPageHandler(application)

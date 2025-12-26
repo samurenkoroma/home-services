@@ -20,7 +20,9 @@ type AuthConfig struct {
 	RefreshSecret string
 }
 type ServerConfig struct {
-	ApiPort string
+	ApiPort    string
+	ApiHost    string
+	StorageDir string
 }
 
 type LoggerConfig struct {
@@ -51,7 +53,9 @@ func LoadConfig() *Config {
 			RefreshSecret: os.Getenv("REFRESH_SECRET_JWT"),
 		},
 		Server: ServerConfig{
-			ApiPort: getString("API_PORT", ":8080"),
+			ApiPort:    getString("API_PORT", ":8080"),
+			ApiHost:    getString("API_HOST", "localhost"),
+			StorageDir: getString("STORAGE_DIR", "/mnt"),
 		},
 		Logger: LoggerConfig{
 			Level:  getInt("LOG_LEVEL", 0),

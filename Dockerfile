@@ -10,7 +10,7 @@ RUN go mod download
 
 COPY . .
 
-RUN #GOARCH=arm64 go build -o application main.go
+# RUN GOARCH=arm64 go build -o application cmd/main.go
 RUN go build -o application cmd/main.go
 
 FROM alpine
