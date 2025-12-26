@@ -13,12 +13,12 @@ COPY . .
 # RUN GOARCH=arm64 go build -o application cmd/main.go
 RUN go build -o application cmd/main.go
 RUN go build -o scaner cmd/scaner/main.go
-RUN go build -o migrations migrations/auto.go
+RUN go build -o migrate migrations/auto.go
 
 FROM alpine
 
 COPY --from=build /app/application /app/application
 COPY --from=build /app/scaner /app/scaner
-COPY --from=build /app/migrations /app/migrations
+COPY --from=build /app/migrate /app/migrate
 
 CMD ["/app/application"]
